@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final Econometría - Análisis Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .report-info {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-top: 10px;
+        }
+        
+        nav {
+            background-color: #34495e;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+            page-break-inside: avoid;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+        }
+        
+        h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 5px solid #3498db;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 5px solid;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left-color: #17a2b8;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left-color: #28a745;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left-color: #ffc107;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left-color: #f5c6cb;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-caption {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 12px;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        .metric-box {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .metric-label {
+            font-size: 0.85em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .key-findings {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+            margin: 20px 0;
+        }
+        
+        .key-findings ul {
+            margin-left: 20px;
+        }
+        
+        .key-findings li {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9em;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background-color: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .stat-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .stat-card .value {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            h2 {
+                page-break-before: always;
+            }
+            nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Proyecto Final Econometría</h1>
+            <div class="report-info">
+                <p><strong>Análisis Completo de Regresión y Datos de Panel</strong></p>
+                <p>Generado: 19 de March de 2026 - 14:35:31</p>
+            </div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#section1">Regresión Simple</a></li>
+                <li><a href="#section2">Regresión Múltiple</a></li>
+                <li><a href="#section3">Análisis Panel</a></li>
+                <li><a href="#section4">Series de Tiempo</a></li>
+                <li><a href="#section5">Conclusiones</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <!-- SECTION 1: EXECUTIVE SUMMARY -->
+            <section>
+                <div class="section-badge">RESUMEN EJECUTIVO</div>
+                <h2>Descripción General del Proyecto</h2>
+                <div class="key-findings">
+                    <h3>🎯 Objetivos del Análisis:</h3>
+                    <ul>
+                        <li><strong>Regresión Lineal:</strong> Analizar la relación entre el ETF VHT (Vanguard Healthcare ETF) y 5 acciones farmacéuticas (PFE, ABBV, MRK, ABT, LLY)</li>
+                        <li><strong>Datos Panel:</strong> Estudiar el crecimiento de ingresos trimestrales mediante efectos fijos, aleatorios y pooled OLS</li>
+                        <li><strong>Series Temporales:</strong> Generar pronósticos de ROA mediante modelos ARIMA y autorregresivos</li>
+                        <li><strong>Validación Diagnóstica:</strong> Verificar heterocedasticidad, autocorrelación y multicolinealidad</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>📈 Stocks Analizados</h4>
+                        <div class="value">5</div>
+                        <p>PFE, ABBV, MRK, ABT, LLY</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📅 Período de Datos</h4>
+                        <div class="value">2 años</div>
+                        <p>Retornos diarios (Regresión)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📊 Observaciones Panel</h4>
+                        <div class="value">37</div>
+                        <p>Trimestres por acción</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECTION 2: SIMPLE REGRESSION -->
+            <section id="section1">
+                <div class="section-badge">SECCIÓN 1</div>
+                <h2>1. Análisis de Regresión Lineal Simple</h2>
+                
+                <h3>📋 Modelo: VHT vs Acciones Individuales</h3>
+                <p>Se estimaron cinco modelos de regresión simple para analizar la relación individual entre el ETF VHT y cada acción farmacéutica.</p>
+                
+                <div class="alert alert-info">
+                    <strong>📌 Especificación del Modelo:</strong><br>
+                    VHT_returns = β₀ + β₁ × Stock_returns + ε
+                    <br><br>
+                    <strong>Interpretación:</strong> El coeficiente β₁ (beta) indica cuánto cambia el retorno de VHT por cada unidad de cambio en el retorno de la acción, asumiendo que los demás factores permanecen constantes.
+                </div>
+                
+                <h3>📊 Diagnósticos de Heterocedasticidad</h3>
+                <p>Se realizaron dos tests para detectar heterocedasticidad:</p>
+                <ul>
+                    <li><strong>Breusch-Pagan Test:</strong> Prueba la hipótesis nula de homocedasticidad</li>
+                    <li><strong>Goldfeld-Quandt Test:</strong> Complementa el análisis dividiendo la muestra en subgrupos</li>
+                </ul>
+                
+                <div class="alert alert-warning">
+                    <strong>⚠️ Interpretación:</strong> Si el p-valor < 0.05, existe evidencia de heterocedasticidad (varianza no constante de los errores). Esto puede afectar la eficiencia de los estimadores OLS, aunque no los sesgos.
+                </div>
+            </section>
+            
+            <!-- SECTION 3: MULTIPLE REGRESSION -->
+            <section id="section2">
+                <div class="section-badge">SECCIÓN 2</div>
+                <h2>2. Análisis de Regresión Lineal Múltiple</h2>
+                
+                <h3>📋 Modelo Múltiple con Todas las Acciones</h3>
+                <p>Se estimó un modelo de regresión múltiple incluyendo los 5 stocks simultáneamente:</p>
+                
+                <div class="alert alert-info">
+                    <strong>📌 Especificación:</strong><br>
+                    VHT = β₀ + β₁×PFE + β₂×ABBV + β₃×MRK + β₄×ABT + β₅×LLY + ε
+                </div>
+                
+                <h3>🔍 Análisis de Multicolinealidad</h3>
+                <p>Se calculó el <strong>Variance Inflation Factor (VIF)</strong> para cada variable independiente:</p>
+                <ul>
+                    <li><strong>VIF < 5:</strong> Baja multicolinealidad (aceptable)</li>
+                    <li><strong>5 ≤ VIF < 10:</strong> Multicolinealidad moderada (puede ser problemática)</li>
+                    <li><strong>VIF ≥ 10:</strong> Alta multicolinealidad (requiere atención)</li>
+                </ul>
+                
+                <h3>⏱️ Análisis de Autocorrelación</h3>
+                <p><strong>Estadístico de Durbin-Watson:</strong> Mide correlación serial de residuos</p>
+                <ul>
+                    <li>DW ≈ 2: Sin autocorrelación</li>
+                    <li>DW < 2: Autocorrelación positiva (tendencia)</li>
+                    <li>DW > 2: Autocorrelación negativa (inversión)</li>
+                </ul>
+                
+                <h3>📈 Matriz de Correlación</h3>
+                <p>Muestra la correlación lineal entre todas las variables. En datos de series de tiempo financieras, las correlaciones positivas fuertes son comunes dentro del mismo sector.</p>
+            </section>
+            
+            <!-- SECTION 4: PANEL DATA -->
+            <section id="section3">
+                <div class="section-badge">SECCIÓN 3</div>
+                <h2>3. Análisis de Datos de Panel</h2>
+                
+                <h3>📊 Estructura de Datos Panel</h3>
+                <div class="alert alert-info">
+                    <strong>Características:</strong>
+                    <ul>
+                        <li>5 unidades transversales (stocks)</li>
+                        <li>37 períodos de tiempo (trimestres)</li>
+                        <li>Panel balanceado (mismo número de observaciones por stock)</li>
+                        <li>Total: 185 observaciones (5 × 37)</li>
+                    </ul>
+                </div>
+                
+                <h3>🎯 Variable Dependiente</h3>
+                <p><strong>RevenueGrowth:</strong> Crecimiento trimestral de ingresos (QoQ %)</p>
+                
+                <h3>🔧 Variables Independientes (Rezagadas 1 Trimestre)</h3>
+                <ul>
+                    <li>GrossMargin_lag1: Margen bruto del trimestre anterior</li>
+                    <li>OperatingMargin_lag1: Margen operativo del trimestre anterior</li>
+                    <li>ROA_TTM_lag1: Rendimiento sobre activos (TTM) del trimestre anterior</li>
+                    <li>AssetTurnover_lag1: Rotación de activos del trimestre anterior</li>
+                </ul>
+                
+                <h3>📈 Modelos de Panel Estimados</h3>
+                
+                <h4>1️⃣ Pooled OLS</h4>
+                <p>Combina todas las observaciones ignorando la estructura de panel. Asume que todos los stocks tienen el mismo intercepto y coeficientes.</p>
+                
+                <h4>2️⃣ Fixed Effects (Efectos Fijos)</h4>
+                <p>Permite que cada stock tenga su propio intercepto. Controla por características invariantes en el tiempo de cada stock.</p>
+                <div class="alert alert-success">
+                    <strong>Ventajas:</strong> Controla heterogeneidad no observada, elimina sesgo de variables omitidas
+                </div>
+                
+                <h4>3️⃣ Random Effects (Efectos Aleatorios)</h4>
+                <p>Asume que los efectos específicos por stock son no correlacionados con los regresores. Más eficiente que FE si el supuesto se cumple.</p>
+                
+                <h3>🔬 Test de Hausman</h3>
+                <p>Compara FE vs RE para determinar cuál modelo es más apropiado:</p>
+                <div class="alert alert-info">
+                    <strong>Hipótesis Nula (H₀):</strong> Random Effects es consistente y eficiente<br>
+                    <strong>Si p-valor < 0.05:</strong> Usar Fixed Effects (RE es inconsistente)<br>
+                    <strong>Si p-valor ≥ 0.05:</strong> Usar Random Effects (RE es preferible)
+                </div>
+                
+                <h3>📋 Test de Breusch-Pagan LM</h3>
+                <p>Verifica si existe heterogeneidad entre stocks (efectos de panel significativos):</p>
+                <div class="alert alert-info">
+                    <strong>Si p-valor < 0.05:</strong> Hay efectos de panel significativos → No usar Pooled OLS<br>
+                    <strong>Si p-valor ≥ 0.05:</strong> No hay efectos significativos → Pooled OLS puede ser adecuado
+                </div>
+            </section>
+            
+            <!-- SECTION 5: TIME SERIES -->
+            <section id="section4">
+                <div class="section-badge">SECCIÓN 4</div>
+                <h2>4. Análisis de Series de Tiempo y Pronósticos</h2>
+                
+                <h3>📈 Variable de Pronóstico: ROA_TTM</h3>
+                <p><strong>Return on Assets (Trailing Twelve Months):</strong> Rentabilidad sobre los activos totales en los últimos 12 meses.</p>
+                
+                <h3>🔍 Pruebas de Estacionariedad</h3>
+                <p>Fundamental para modelar series temporales:</p>
+                <ul>
+                    <li><strong>ADF Test (Augmented Dickey-Fuller):</strong> H₀ = Serie tiene raíz unitaria (no estacionaria)</li>
+                    <li><strong>KPSS Test:</strong> H₀ = Serie es estacionaria</li>
+                </ul>
+                
+                <div class="alert alert-info">
+                    <strong>Conclusión:</strong> Serie es estacionaria si ADF p-valor < 0.05 Y KPSS p-valor ≥ 0.05
+                </div>
+                
+                <h3>🤖 Modelos de Pronóstico</h3>
+                
+                <h4>1. Modelo ARIMA Individual</h4>
+                <p>Se ajusta un modelo ARIMA(1,0,1) para cada stock de forma independiente:</p>
+                <ul>
+                    <li><strong>AR(1):</strong> Un rezago autorregresivo</li>
+                    <li><strong>I(0):</strong> No diferenciación (serie estacionaria)</li>
+                    <li><strong>MA(1):</strong> Un término de media móvil</li>
+                </ul>
+                <p><strong>Ventajas:</strong> Captura patrones específicos de cada stock. <strong>Desventajas:</strong> No aprovecha información cruzada.</p>
+                
+                <h4>2. Modelo Panel Autoregresivo (Panel AR)</h4>
+                <p>Regresión con rezagos sobre datos de panel con efectos fijos por ticker:</p>
+                <div class="alert alert-success">
+                    <strong>Especificación:</strong><br>
+                    ROA_TTM = α + β₁×ROA_lag1 + β₂×ROA_lag2 + γ×ROE_lag1 + efectos_fijos + ε
+                    <br><br>
+                    <strong>Ventajas:</strong> Pooling de información, eficiencia estadística mayor
+                </div>
+                
+                <h3>📊 Métricas de Precisión (In-Sample)</h3>
+                <ul>
+                    <li><strong>MAE:</strong> Error Absoluto Medio</li>
+                    <li><strong>RMSE:</strong> Raíz del Error Cuadrático Medio</li>
+                    <li><strong>MAPE:</strong> Error Absoluto Porcentual Medio</li>
+                    <li><strong>AIC/BIC:</strong> Criterios de Información (penalizan complejidad)</li>
+                </ul>
+                
+                <h3>🔮 Horizonte de Pronóstico</h3>
+                <p><strong>4 trimestres (1 año) adelante.</strong> Apropiado para datos trimestrales con ~37 observaciones por stock.</p>
+            </section>
+            
+            <!-- SECTION 6: VISUALIZATIONS -->
+            <section>
+                <h2>5. Visualizaciones Clave</h2>
+                <p>A continuación se presentan los gráficos principales del análisis:</p>
+
+            </section>
+            
+            <!-- SECTION 7: KEY FINDINGS & CONCLUSIONS -->
+            <section id="section5">
+                <h2>6. Conclusiones y Recomendaciones</h2>
+                
+                <h3>🔑 Hallazgos Principales</h3>
+                <div class="key-findings">
+                    <ul>
+                        <li><strong>Relaciones Estadísticas:</strong> Las acciones farmacéuticas están altamente correlacionadas con el ETF VHT (como se esperaría dado que el ETF replica el sector healthcare)</li>
+                        <li><strong>Heterocedasticidad:</strong> Revise los tests de Breusch-Pagan y Goldfeld-Quandt para determinar si hay varianza no constante en los errores</li>
+                        <li><strong>Autocorrelación:</strong> El estadístico de Durbin-Watson cerca de 2 sugiere baja autocorrelación en series de tiempo financieras</li>
+                        <li><strong>Multicolinealidad:</strong> Verifique los valores VIF - correlaciones dentro del sector healthcare pueden ser altas</li>
+                        <li><strong>Efectos de Panel:</strong> El test de Breusch-Pagan determina si usar Pooled OLS o modelos con efectos</li>
+                        <li><strong>Hausman Test:</strong> Decide entre Fixed Effects y Random Effects basado en la correlación entre efectos y regresores</li>
+                        <li><strong>Pronósticos:</strong> Compare RMSE y MAPE entre modelos ARIMA y Panel AR para elegir el mejor predictor</li>
+                    </ul>
+                </div>
+                
+                <h3>✅ Recomendaciones Metodológicas</h3>
+                <div class="alert alert-success">
+                    <h4>Para Modelos de Regresión:</h4>
+                    <ul>
+                        <li>Si se detecta heterocedasticidad, usar errores estándar robustos (HC1/HC3)</li>
+                        <li>Si VIF > 10, considerar eliminar variables o usar regresión ridge</li>
+                        <li>Incluir gráficos de residuos para verificar supuestos visualmente</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-success">
+                    <h4>Para Análisis de Panel:</h4>
+                    <ul>
+                        <li>Usar Fixed Effects si el test de Hausman es significativo (p < 0.05)</li>
+                        <li>Verificar que Random Effects es apropiado si Hausman no es significativo</li>
+                        <li>Revisar gráficos de residuos por acción para heterogeneidad</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-success">
+                    <h4>Para Pronósticos:</h4>
+                    <ul>
+                        <li>Revisar estacionariedad antes de aplicar ARIMA</li>
+                        <li>Usar diferenciación si la serie tiene tendencia</li>
+                        <li>Comparar modelos con criterios AIC/BIC y métricas de error</li>
+                        <li>Retrain modelos trimestral o mensualmente con datos nuevos</li>
+                    </ul>
+                </div>
+                
+                <h3>⚠️ Limitaciones y Consideraciones</h3>
+                <div class="alert alert-warning">
+                    <ul>
+                        <li>La regresión lineal asume relaciones lineales; los mercados pueden exhibir comportamientos no lineales</li>
+                        <li>Los datos históricos no garantizan desempeño futuro</li>
+                        <li>Omisión de variables macroeconómicas relevantes (tasas de interés, índices de mercado)</li>
+                        <li>Panel data con N=5 (stocks) es relativamente pequeño; más stocks mejoraría la precisión</li>
+                        <li>No se incluyen choques estructurales o cambios regulatorios en el sector farmacéutico</li>
+                    </ul>
+                </div>
+                
+                <h3>🚀 Extensiones Futuras</h3>
+                <ul>
+                    <li>Incluir variables macroeconómicas (tasas, volatilidad, spreads)</li>
+                    <li>Modelar volatilidad con GARCH si hay clusters de volatilidad</li>
+                    <li>Análisis de cointegración si existe equilibrio de largo plazo</li>
+                    <li>Modelos de cambio de régimen (Markov Switching)</li>
+                    <li>Machine Learning: Random Forest, XGBoost para pronósticos</li>
+                </ul>
+            </section>
+            
+            <!-- SECTION 8: TECHNICAL NOTES -->
+            <section>
+                <h2>7. Notas Técnicas y Metodología</h2>
+                
+                <h3>📚 Bibliotecas Utilizadas</h3>
+                <ul>
+                    <li><strong>yfinance:</strong> Descarga de precios históricos de Yahoo Finance</li>
+                    <li><strong>pandas/numpy:</strong> Manipulación y cálculos de datos</li>
+                    <li><strong>statsmodels:</strong> Regresión OLS, tests diagnósticos, ARIMA</li>
+                    <li><strong>linearmodels:</strong> Modelos de panel data (Pooled, FE, RE)</li>
+                    <li><strong>scipy.stats:</strong> Tests estadísticos (Durbin-Watson, chi-squared)</li>
+                    <li><strong>matplotlib/seaborn:</strong> Visualizaciones</li>
+                </ul>
+                
+                <h3>🔧 Especificaciones Técnicas</h3>
+                <ul>
+                    <li><strong>Período de Datos (Regresión):</strong> Últimos 2 años de datos diarios</li>
+                    <li><strong>Período de Datos (Panel):</strong> 10 años trimestrales (37 observaciones por stock)</li>
+                    <li><strong>Cálculo de Retornos:</strong> Retornos logarítmicos diarios (pct_change)</li>
+                    <li><strong>Errores Estándar:</strong> HC1 robusto para modelos OLS</li>
+                    <li><strong>Clustered SE:</strong> Por entidad (stock) para modelos de panel</li>
+                    <li><strong>Modelo ARIMA:</strong> Especificación (1,0,1) con 4 trimestres de horizonte</li>
+                </ul>
+                
+                <h3>📊 Tratamiento de Datos</h3>
+                <ul>
+                    <li>NaN forward-filled y backward-filled en series de precios</li>
+                    <li>Valores infinitos removidos en ratios financieros</li>
+                    <li>Índice de panel: ['Ticker', 'Date'] para modelos linearmodels</li>
+                    <li>Variables rezagadas: lag() por ticker para mantener estructura panel</li>
+                </ul>
+            </section>
+            
+        </div>
+        
+        <footer>
+            <p><strong>Proyecto Final Econometría</strong> | Análisis Integrado: Regresión Lineal, Datos de Panel, Series de Tiempo</p>
+            <p>Generado automáticamente usando Python, Pandas, StatsModels, y LinearModels</p>
+            <p>© 2026 | Análisis Econométrico Avanzado</p>
+        </footer>
+    </div>
+</body>
+</html>
